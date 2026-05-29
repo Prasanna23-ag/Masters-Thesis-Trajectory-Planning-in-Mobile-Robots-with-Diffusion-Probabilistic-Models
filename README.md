@@ -29,3 +29,15 @@ python scripts/train.py --config config.maze2d_hl --dataset birrt-dataset-v0
 python scripts/train.py --config config.maze2d_ll --dataset birrt-dataset-v0
 ```
 
+## Model Evaluation
+To evaluate the hierarchical diffusion planner in the Gym environment:
+
+```bash
+python scripts/hd_plan_maze2d.py --dataset birrt-dataset-v0
+```
+You may adjust:
+
+- Sub-goal sampling temperature
+- Denoising steps
+- PID gains
+- Action horizon
