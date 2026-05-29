@@ -7,3 +7,10 @@ To achieve this, the project implements a Simple Hierarchical Diffusion (SHD) ar
 - A Low‑Level Diffusion Model that generates short‑horizon action sequences
 - A Hybrid SHD + Bi‑RRT execution pipeline
 - A Gym-based evaluation environment with LL diffuser actions and PID-controlled tracking
+
+## Installation
+This repository contains the full pipeline for hierarchical diffusion training, and evaluation in a custom Gym environment.
+
+conda env create -f environment.yml
+conda activate hier_diffusion
+pip install -e .
