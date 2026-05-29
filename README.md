@@ -6,4 +6,4 @@ To achieve this, the project implements a Simple Hierarchical Diffusion (SHD) ar
 - A High‑Level Diffusion Model that predicts coarse sub‑goals
 - A Low‑Level Diffusion Model that generates short‑horizon action sequences
 - A Hybrid SHD + Bi‑RRT execution pipeline
-- A Gym-based evaluation environment with LL actions and PID-controlled tracking
+- A Gym-based evaluation environment with LL diffuser actions and PID-controlled tracking
