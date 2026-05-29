@@ -57,5 +57,5 @@ Additional thanks to:
 - Technical University of Dortmund 
 - Ruhr Universität Bochum – Mechanics of Adaptive Systems
 - Supervisors: Prof. Dr.-Ing. Tamara Nestorović, M.Sc. Amit Pal
-- Special thanks to: Jr. Prof. Dr. David Kappel, M.Sc. Neeraj Mohan Sushma
+- Special thanks: Jr. Prof. Dr. David Kappel, M.Sc. Neeraj Mohan Sushma
 
