@@ -20,10 +20,10 @@ pip install -e .
 ```
 ## Dataset Setup (IMPORTANT)
 
-The Bi-RRT expert dataset used for training the diffusion models must be placed inside the .d4rl directory in your home folder.
+The Bi-RRT expert dataset used for training the diffusion models must be placed inside the `.d4rl` directory in your home folder.
 ### Steps:
-- Download the dataset file (birrt-dataset-v0.hdf5)
-- Move the dataset file into it .d4RL directory
+- Download the dataset file `birrt-dataset-v0.hdf5`
+- Move the dataset file into it `.d4RL` directory
 D4RL-style datasets are automatically loaded from this location during training and evaluation.
 
 
