@@ -1,0 +1,8 @@
+replace temporal and helper in this for hopper/walker 
+
+file dir.:
+
+diffuser>models>hopper_replace
+
+keep maze file in that when you replace
+
