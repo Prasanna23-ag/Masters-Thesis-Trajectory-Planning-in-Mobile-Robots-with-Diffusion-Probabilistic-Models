@@ -17,3 +17,15 @@ conda env create -f environment.yml
 conda activate diffusion_planner
 pip install -e .
 ```
+## Model Training
+The High-Level and Low-Level diffusion models can be trained independently or in parallel.
+
+- Train the High-Level Diffusion Model
+```bash
+python scripts/train.py --config config.maze2d_hl --dataset birrt-dataset-v0
+```
+- Train the Low-Level Diffusion Model
+```bash
+python scripts/train.py --config config.maze2d_ll --dataset birrt-dataset-v0
+```
+
