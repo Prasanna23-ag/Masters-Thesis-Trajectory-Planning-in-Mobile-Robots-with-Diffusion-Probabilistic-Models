@@ -18,6 +18,15 @@ conda env create -f environment.yml
 conda activate diffusion_planner
 pip install -e .
 ```
+## Dataset Setup (IMPORTANT)
+
+The Bi-RRT expert dataset used for training the diffusion models must be placed inside the .d4rl directory in your home folder.
+### Steps:
+- Download the dataset file (birrt-dataset-v0.hdf5)
+- Move the dataset file into it .d4RL directory
+D4RL-style datasets are automatically loaded from this location during training and evaluation.
+
+
 ## Model Training
 The High-Level and Low-Level diffusion models can be trained independently or in parallel.
 
