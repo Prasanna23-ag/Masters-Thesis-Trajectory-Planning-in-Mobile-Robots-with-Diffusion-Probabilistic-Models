@@ -41,3 +41,18 @@ You may adjust:
 - Denoising steps
 - PID gains
 - Action horizon
+
+## Acknowledgements
+This work is inspired by and builds upon:
+
+### Simple Hierarchical Planning with Diffusion
+Chang Chen, Fei Deng, Kenji Kawaguchi, Caglar Gulcehre, Sungjin Ahn
+Paper: https://arxiv.org/pdf/2401.02644  
+GitHub: https://github.com/changchencc/Simple-Hierarchical-Planning-with-Diffusion
+
+Their hierarchical diffusion framework served as a conceptual reference for the architecture implemented in this thesis.
+
+Additional thanks to:
+- Technical University of Dortmund 
+- Ruhr Universität Bochum – Mechanics of Adaptive Systems
+- Supervisors: Prof. Dr.-Ing. Tamara Nestorović, M.Sc. Amit Pal
