@@ -12,5 +12,5 @@ To achieve this, the project implements a Simple Hierarchical Diffusion (SHD) ar
 This repository contains the full pipeline for hierarchical diffusion training, and evaluation in a custom Gym environment.
 
 conda env create -f environment.yml
-conda activate hier_diffusion
+conda activate diffusion_planner
 pip install -e .
