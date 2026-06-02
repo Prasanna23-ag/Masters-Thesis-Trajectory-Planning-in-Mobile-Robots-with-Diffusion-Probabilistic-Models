@@ -72,13 +72,9 @@ for i in range(n_samples):
     rollout = [observation.copy()]
 
     hl_cond[0] = observation
-    # hl_cond[0] = dataset.normalizer.normalize(observation, key="observations")
     action, samples = hl_policy(hl_cond, batch_size=hl_args.batch_size)
-    # print(f"Action shape: {action.shape}")
-    # print(f"Samples shape: {samples.observations.shape}")
     hl_plan = samples.observations
     hl_xy = hl_plan[0][:, :2] 
-    # hl_plan = dataset.normalizer.unnormalize(hl_plan, key="observations")
     renderer.composite(join(hl_args.savepath, f"hl_plan_{i}.png"),[hl_xy],ncol=1)
     
     hl_subgoals = hl_plan[0][:, :2]         ## saving subgoals for visualization
@@ -92,14 +88,9 @@ for i in range(n_samples):
     }
 
     _, ll_samples = ll_policy(ll_cond, batch_size=-1)
-    # print(f"Action shape: {ll_samples.actions.shape}")
-    # print(f"Samples shape: {ll_samples.observations.shape}")
     ll_actions = ll_samples.actions
     ll_samples = ll_samples.observations
     ll_samples = ll_samples.reshape(B, (M - 1), ll_args.horizon, -1)
-    # print(f"Action shape1: {ll_samples.actions.shape}")
-    # print("LL actions sample:", ll_actions[0, :5])
-    # print(f"Samples shape1: {ll_samples.shape}")
     ll_xy = ll_samples[0][:, :, :2].reshape(-1, 2) 
     renderer.composite(join(hl_args.savepath, f"ll_plan_{i}.png"),[ll_xy],ncol=1)
 
@@ -125,12 +116,7 @@ for i in range(n_samples):
     rest  = la[:, 1:, :].reshape(-1, A) # (S*(H-1), 2)
 
     actions_flat = np.concatenate([first, rest], axis=0)
-
-    # print("LL actions_flat shape:", actions_flat.shape)
-    # print("LL actions_flat[:5]:", actions_flat[:5])
-
-    ll_sequence = ll_samples[0]
-    # print(f"LL sequence shape: {ll_sequence.shape}")    
+    ll_sequence = ll_samples[0] 
     total_reward = []
     action_list = []
 
@@ -148,51 +134,7 @@ for i in range(n_samples):
                 next_waypoint[2:] = 0
         
             state = observation.copy()
-##########---------1-------------
-            # # position difference
-            # dx = next_waypoint[0] - state[0]
-            # dy = next_waypoint[1] - state[1]
-
-            # # speed towards waypoint
-            # # v = np.linalg.norm([dx, dy])
-            # v = 0.1 * np.linalg.norm([dx, dy])
-
-            # # desired heading
-            # desired_theta = np.arctan2(dy, dx)
-            # # omega = desired_theta - state[2]
-            # omega = 0.3 * (desired_theta - state[2])
-
-            # # action is [v, omega]
-            # action = np.array([v, omega], dtype=np.float32)
-
-
-            # dx = next_waypoint[0] - state[0]
-            # dy = next_waypoint[1] - state[1]
-            # distance = np.linalg.norm([dx, dy])
-##########-------1---------
-
-            # max_dist = 0.5      ##check
-            # distance = min(distance, max_dist)
-
-            # K_v = 0.5
-            # K_omega = 1.0
-
-            # # forward speed
-            # v = np.clip(K_v * distance, 0, 1.0)
-
-            # # heading control with angle wrapping
-            # desired_theta = np.arctan2(dy, dx)
-            # heading_error = desired_theta - state[2]
-            # heading_error = (heading_error + np.pi) % (2 * np.pi) - np.pi
-
-            # omega = np.clip(K_omega * heading_error, -1.0, 1.0)
-
-            # action = np.array([v, omega], dtype=np.float32)
-
-            # action = np.clip(action, env_eval.action_space.low, env_eval.action_space.high)
-
-            #######################---------2-------------
-            # --- USE LL ACTIONS ---
+            # --- USE LL DIFFUSER ACTIONS ---
             if t < len(actions_flat):
                 action = actions_flat[t].astype(np.float32)
             else:
@@ -200,9 +142,8 @@ for i in range(n_samples):
 
             action = np.clip(action, env_eval.action_space.low, env_eval.action_space.high)
 
-            #####################   2   ######################
-            # action = next_waypoint[:2] - state[:2]   #### temp
-            # print("actions sample:", action)
+            # --- USE LPID-CONTROL ACTIONS ---
+            # action = next_waypoint[:2] - state[:2]  
             next_observation, reward, terminal, _ = env_eval.step(action)
 
             hl_xy = hl_plan[0][:, :2]
