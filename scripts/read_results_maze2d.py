@@ -6,19 +6,11 @@ import pdb
 import diffuser.utils as utils
 import matplotlib.pyplot as plt
 
-# DATASETS = [
-#     f"{env}-{buffer}-v2"
-#     for env in ["maze2d"]
-#     for buffer in ["umaze", "medium", "large"]
-# ]
-
 DATASETS = ["birrt-dataset-v0"]
 LOGBASE = "logs"
 TRIAL = "*"
 EXP_NAME = "plans*/*"
 verbose = False
-
-
 
 def load_results(paths):
     scores = []
@@ -89,9 +81,6 @@ if __name__ == "__main__":
             paths = glob.glob(os.path.join(subdir, "0", "*_rollout.json"))
             paths = sorted(paths)
             
-            # print("Looking for rollouts in:", os.path.join(subdir, "0", "*_rollout.json"))
-            # print("Found paths:", paths)
-            
             mean, err, scores, sus_rate = load_results(paths)
             if np.isnan(mean):
                 continue
@@ -108,8 +97,6 @@ if __name__ == "__main__":
                 f.write(f"{dataset.ljust(30)} | {name.ljust(50)} | {path.ljust(50)} | {len(scores)} scores\n")
                 f.write(f"    {mean:.1f} +/- {err:.2f}\n")
                 f.write(f"sus_rate: {sus_rate * 100:.2f}\n")
-
-
 
             if len(scores) > 0:
                 plt.figure(figsize=(8,6))
