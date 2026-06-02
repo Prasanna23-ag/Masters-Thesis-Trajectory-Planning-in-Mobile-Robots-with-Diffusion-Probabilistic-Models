@@ -146,18 +146,6 @@ class MuJoCoRenderer:
                'elevation': -20
            }
 
-
-        ## 2D Maze environments ##
-        # if render_kwargs is None:
-        #     xpos = observation[0] if not partial else 0
-        #     render_kwargs = {
-        #         'trackbodyid': 2,
-        #         'distance': 10,
-        #         'lookat': [xpos, 0, 0],
-        #         'elevation': 90
-        #     }
-
-
         for key, val in render_kwargs.items():
             if key == 'lookat':
                 self.viewer.cam.lookat[:] = val[:]
@@ -600,17 +588,12 @@ class MazeRenderer:
 
 class Maze2dRenderer(MazeRenderer):
     def __init__(self, env, observation_dim=None):
-        # self.env_name = env
-        # self.env = load_environment(env)
-        # self.env = env                      # actual TurtleBotEnv instance
-
         if isinstance(env, str):
             self.env = gym.make(env)
         else:
             self.env = env
 
         self.env_name = "birrt-dataset-v0"  # string key for MAZE_BOUNDS
-        # self._background = self.env.maze_arr == 10
 
         ##### loading pgm map for rendering #####
         pgm_path = os.path.join(os.path.dirname(__file__), "map2.pgm")
@@ -635,29 +618,9 @@ class Maze2dRenderer(MazeRenderer):
         self.observation_dim = np.prod(self.env.observation_space.shape)
         self.action_dim = np.prod(self.env.action_space.shape)
         self.goal = None
-        self._remove_margins = False
-        # self._extent = (0, 1, 1, 0)
-
-    # def renders(self, observations, conditions=None, **kwargs):
-    #     bounds = MAZE_BOUNDS[self.env_name]
-
-    #     observations = observations + 0.5
-    #     if len(bounds) == 2:
-    #         _, scale = bounds
-    #         observations /= scale
-    #     elif len(bounds) == 4:
-    #         _, iscale, _, jscale = bounds
-    #         observations[:, 0] /= iscale
-    #         observations[:, 1] /= jscale
-    #     else:
-    #         raise RuntimeError(f"Unrecognized bounds for {self.env_name}: {bounds}")
-
-    #     if conditions is not None:
-    #         conditions /= scale
-    #     return super().renders(observations, conditions, **kwargs)
+        self._remove_margins = False        
 
     def renders(self, observations, conditions=None, **kwargs):
-        # --- World → Map-frame conversion (meters → meters) ---
         resolution = 0.05  # meters per pixel
         origin_x, origin_y = -0.844, -1.35
 
