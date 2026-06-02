@@ -141,15 +141,7 @@ eval_sample_n = 3
 
 train_writer = SummaryWriter(log_dir=args.savepath + "-train")
 
-    #### use this for maze2d
-# for i in range(n_epochs):
-#     print(f"Epoch {i} / {n_epochs} | {args.savepath}")
-
-#     trainer.train(n_train_steps=args.n_steps_per_epoch, writer=train_writer)
-
-
-
-#### used for custom env
+# ---------------used for turtlebot env-------------#
 total_steps = 0
 losses, a0_losses, a_losses, s_losses, t_losses = [], [], [], [], []
 for i in range(n_epochs):
@@ -168,9 +160,7 @@ for i in range(n_epochs):
         print(f"[ rendering ] Step {total_steps} — generating reference image")
         trainer.render_reference(trainer.n_reference, step=total_steps)
 
-
 ###### Plot all loss components ######
-
 plt.figure(figsize=(10,6))
 plt.plot(losses, label="Total Loss")
 plt.plot(a0_losses, label="a0_loss")
