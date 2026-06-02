@@ -68,3 +68,15 @@ Additional thanks to:
 - Supervisors: Prof. Dr.-Ing. Tamara Nestorović, M.Sc. Amit Pal
 - Special thanks: Jr. Prof. Dr. David Kappel, M.Sc. Neeraj Mohan Sushma
 
+## Citation
+
+If you use this code in academic work, please cite the accompanying thesis:
+```bash
+@mastersthesis{agarwal2026diffusionplanning,
+  title     = {Trajectory Planning in Mobile Robots with Diffusion Probabilistic Models},
+  author    = {Agarwal, Prasanna},
+  school    = {Technical University of Dortmund},
+  year      = {2026},
+  address   = {Dortmund, Germany},
+}
+```
