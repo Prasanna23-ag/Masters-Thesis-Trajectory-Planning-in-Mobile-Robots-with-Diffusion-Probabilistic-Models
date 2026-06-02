@@ -27,8 +27,6 @@ class DatasetNormalizer:
                 self.normalizers[key] = normalizer(val)
             except:
                 print(f'[ utils/normalization ] Skipping {key} | {normalizer}')
-            # key: normalizer(val)
-            # for key, val in dataset.items()
 
     def __repr__(self):
         string = ''
@@ -162,12 +160,6 @@ class LimitsNormalizer(Normalizer):
     '''
 
     def normalize(self, x):
-        ## [ 0, 1 ]
-        # print("🔍 Normalizing input:")
-        # print("  x shape:", x.shape)
-        # print("  mins shape:", self.mins.shape)
-        # print("  maxs shape:", self.maxs.shape)
-
         x = (x - self.mins) / (self.maxs - self.mins)
         ## [ -1, 1 ]
         x = 2 * x - 1
@@ -177,11 +169,9 @@ class LimitsNormalizer(Normalizer):
         '''
             x : [ -1, 1 ]
         '''
-        if x.max() > 1 + eps or x.min() < -1 - eps:
-            # print(f'[ datasets/mujoco ] Warning: sample out of range | ({x.min():.4f}, {x.max():.4f})')
+        if x.max() > 1 + eps or x.min() < -1 - eps:            
             x = np.clip(x, -1, 1)
 
-        ## [ -1, 1 ] --> [ 0, 1 ]
         x = (x + 1) / 2.
 
         return x * (self.maxs - self.mins) + self.mins
@@ -290,7 +280,6 @@ class CDFNormalizer1d:
 
 def empirical_cdf(sample):
     ## https://stackoverflow.com/a/33346366
-
     # find the unique values and their corresponding counts
     quantiles, counts = np.unique(sample, return_counts=True)
 
